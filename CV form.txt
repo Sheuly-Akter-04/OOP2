@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Resum
+{
+    public partial class PersonalInf : Form
+    {
+        DBAccess objDBAccess = new DBAccess();
+
+        public PersonalInf()
+        {
+            InitializeComponent();
+        }
+        private void btnPersonalInf_Click(object sender, EventArgs e)
+        {
+            string userFirstname = txtFirstname.Text;
+            string userLastname = txtLastname.Text;
+            string userAddress = txtAddress.text;
+            string userGender = txtGender.text;
+            string userEmail = txtEmail.text;
+            string userPhone = txtPhone.text;
+            string userUsername = txtUsername.Text;
+            string userPassword = txtPassword.Text;
+            
+           
+
+            if (userFirstname.Equals(""))
+            {
+                MessageBox.Show("Enter your First name.");
+            }
+            else if (userLastname.Equals(""))
+            {
+                MessageBox.Show("Enter your Last name .");
+            }
+            else if (userAddress.Equals(""))
+            {
+                MessageBox.Show("Enter your address.");
+            }
+            else if (userGender.Equals(""))
+            {
+                MessageBox.Show("Enter your gender.");
+            }
+            else if (userEmail.Equals(""))
+            {
+                MessageBox.Show("Enter your email.");
+            }
+            else if (userPhone.Equals(""))
+            {
+                MessageBox.Show("Enter your phone.");
+            }
+            else if (userUsername.Equals(""))
+            {
+                MessageBox.Show("Enter your user name.");
+            }
+            else if (userPassword.Equals(""))
+            {
+                MessageBox.Show("Enter your password.");
+            }
+            
+            else
+            {
+                SqlCommand insertCommand = new SqlCommand("Insert into Users(Name,Email,Password,Country,Age) values(@userName, @userEmail, @userPassword, @userCountry)")
+
+
+                insertCommand.Parameters.AddWithValue("@userFirstname, userFirstname");
+                insertCommand.Parameters.AddWithValue("@userLastname, userLastname");
+                insertCommand.Parameters.AddWithValue("@userAddress, userAddress");
+                insertCommand.Parameters.AddWithValue("@userGender, userGender");
+                insertCommand.Parameters.AddWithValue("@userEmail, userEmail");
+                insertCommand.Parameters.AddWithValue("@userPhone, userPhone");
+                insertCommand.Parameters.AddWithValue("@userUsername, userUsername");
+                insertCommand.Parameters.AddWithValue("@userPassword, userPassword");
+                
+
+
+                int row = objDBAccess.executeQuery(insertCommand);
+
+                if (row == 1)
+                {
+                    MessageBox.Show("Account Created Successfully.");
+
+                    this.Hide();
+                    HomePage home = new HomePage();
+                    home.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Error. Try again .");
+                }
+
+
+            }
+
+
+
+
+        }
