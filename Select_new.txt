@@ -1,0 +1,43 @@
+//Initiating SQL Connection:
+            SqlConnection con = new SqlConnection();
+
+            con.ConnectionString = "data source = localhost; database = MyDatabase2; " +
+                                   "integrated security = SSPI";
+
+            string userName = txtUserName.Text.Trim();
+            string passWord = txtPassword.Text.Trim();
+            
+            //Generating SQL Query
+
+            string query = "Select * from Users where UserName= '"
+                + userName + "' and Password= '" + passWord + "'";
+
+            SqlCommand command = new SqlCommand(query, con);
+
+            //Opening the connection:
+            con.Open();
+
+            //Execute SQL Query:
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        User user = new User()
+                        {
+                            Id = reader.GetInt32(0),
+                            Username = reader.GetString(1),
+                            Password = reader.GetString(2),
+                            Usertype = reader.GetInt32(3)
+                        };
+
+                        con.Close();
+                        MessageBox.Show("Login Successful");
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid user");
+                }

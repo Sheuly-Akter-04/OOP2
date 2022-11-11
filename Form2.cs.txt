@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace MyWinFormsProject1
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+
+            
+        }
+
+        public Form2(string details)
+        {
+            InitializeComponent();
+
+            rtbForm2.Text = details;
+        }
+
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            //Initiating SQL Connection:
+            SqlConnection con = new SqlConnection();
+
+            con.ConnectionString = "data source = DESKTOP-4P926OF; database = MyOOP2DB; " +
+                                   "integrated security = SSPI";
+
+            //Generating SQL Query
+
+            string query = "Select * from Student";
+
+            SqlCommand command = new SqlCommand(query, con);
+
+            //Opening the connection:
+            con.Open();
+
+            //Execute SQL Query:
+            SqlDataReader reader = command.ExecuteReader();
+
+           
+
+            //Binding reader to source
+            BindingSource source = new BindingSource();
+            source.DataSource = reader;
+            
+            con.Close();
+
+            //binding source to grid view control
+            dgvStudentList.DataSource = source;
+        }
+    }
+}

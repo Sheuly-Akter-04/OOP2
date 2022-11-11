@@ -1,0 +1,232 @@
+public partial class Form1 : Form
+    {
+
+        enum GenderEnum
+        {
+            Male,
+            Female
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+
+
+            string[] countries = new string[6];
+
+            countries[0] = "Select a country";
+            countries[1] = "Bangladesh";
+            countries[2] = "India";
+            countries[3] = "Pakistan";
+            countries[4] = "Nepal";
+            countries[5] = "Bhutan";
+
+            cboNationality.DataSource = countries;
+
+            //Initiating SQL Connection:
+            SqlConnection con = new SqlConnection();
+
+            con.ConnectionString = "data source = localhost;" +
+                                   "database = MyDatabase;" +
+                                   "integrated security = SSPI";
+
+            var query = "select * from Student1";
+            ////Generating SQL Query
+            SqlCommand command = new SqlCommand(query, con);
+
+            ////Opening the connection:
+            //con.Open();
+
+            #region SQLDataReader
+
+            ////Execute SQL Query:
+            //SqlDataReader DR = command.ExecuteReader();
+
+            ////Binding reader to binding source
+            //BindingSource source = new BindingSource();
+            //source.DataSource = DR;
+
+            ////Binding gridview or control datacsource to binding source:
+            //dgvStudentList.DataSource = source;
+
+            //Disconnect
+            //con.Close();
+
+            ////txtIDOutput.Text = dgvStudentList.Rows[0].Cells[1].Value.ToString();
+            ////txtNameOutput.Text = dgvStudentList.Rows[0].Cells[2].Value.ToString();
+
+            //int count = 1;
+            ////while(DR.Read())
+            ////{
+            ////    txtIDOutput.Text = DR;
+
+
+            ////    count++;
+            ////}
+            //while (DR.Read())
+            //{
+             //   txtIDOutput.Text = DR["StudentID"].ToString();
+             //   txtNameOutput.Text = DR["Name"].ToString();
+
+
+            //    //Name.Text = dr["Name"].ToString();
+            //    //Surname.Text = dr["Surname"].ToString();
+            //    //BirthDate.Text = dr[3].ToString();
+            //    //Phone_Number.Text = dr[4].ToString();
+            //}
+
+            #endregion
+
+            #region SqlDataAdapter
+
+            //Opening the connection:
+            con.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+
+            //Disconnect
+            con.Close();
+
+            dgvStudentList.DataSource = ds.Tables[0];
+
+            txtIDOutput.Text = ds.Tables[0].Rows[2].ItemArray[1].ToString();
+            txtNameOutput.Text = ds.Tables[0].Rows[2].ItemArray[2].ToString();
+
+            txtGenderOutput.Text = (int) ds.Tables[0].Rows[2].ItemArray[3] ==
+                (int) GenderEnum.Male ? GenderEnum.Male.ToString()
+                : GenderEnum.Female.ToString();
+
+            txtNationalityOutput.Text = ds.Tables[0].Rows[2].ItemArray[4].ToString();
+
+            //int i = 0;
+            //for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+            //{
+            //    MessageBox.Show(ds.Tables[0].Rows[i].ItemArray[1].ToString());
+            //}
+
+            #endregion
+
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            //Initiating SQL Connection:
+            SqlConnection con = new SqlConnection();
+
+            con.ConnectionString = "data source = localhost;" +
+                                   "database = MyDatabase;" +
+                                   "integrated security = SSPI";
+
+            #region  Using Parameters:
+
+            //Generating SQL Query
+            //string sql = "INSERT INTO Student(StudentID,StudentName,Gender,Nationality)" +
+            //             " VALUES(@param1,@param2,@param3,@param4)";
+
+            //using (SqlCommand cmd = new SqlCommand(sql, con))
+            //{
+            //    //Opening the connection:
+            //    con.Open();
+
+            //    cmd.Parameters.Add("@param1", SqlDbType.NVarChar, 50).Value = studentIdInputBox.Text;
+            //    cmd.Parameters.Add("@param2", SqlDbType.NVarChar, 500).Value = nameInputBox.Text;
+
+            //    if (rbMale.Checked)
+            //    {
+            //        cmd.Parameters.Add("@param3", SqlDbType.Int).Value = 0;
+            //    }
+            //    else
+            //    {
+            //        cmd.Parameters.Add("@param3", SqlDbType.Int).Value = 1;
+            //    }
+
+            //    cmd.Parameters.Add("@param4", SqlDbType.NVarChar, 500).Value = cboNationality.SelectedItem.ToString();
+
+            //    cmd.CommandType = CommandType.Text;
+            //    cmd.ExecuteNonQuery();
+            //}
+
+
+            #endregion
+
+            #region SqlDataAdapter
+
+            //Opening the connection:
+                con.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            string sql = null;
+
+            var studentId = studentIdInputBox.Text;
+            var studentName = nameInputBox.Text;
+
+            int gender = -1;
+
+            if (rbMale.Checked)
+            {
+                gender = 0;
+            }
+            else
+            {
+                gender = 1;
+            }
+
+            var nationality = cboNationality.SelectedItem.ToString();
+
+            sql = "insert into Student1 (StudentID,StudentName,Gender,Nationality) values(" +
+                  "'" + studentId + "'," +
+                  "'" + studentName + "'," +
+                  gender + "," +
+                  "'" + nationality + "'" + ")";
+
+            adapter.InsertCommand = new SqlCommand(sql, con);
+            adapter.InsertCommand.ExecuteNonQuery();
+            MessageBox.Show("Row inserted Successfully!! ");
+
+           #endregion
+
+            //Generating SQL Query
+            SqlCommand command2 = new SqlCommand("select * from Student1", con);
+
+            //Execute SQL Query:
+            SqlDataReader dataReader = command2.ExecuteReader();
+
+            //Binding reader to binding source
+            BindingSource source2 = new BindingSource();
+            source2.DataSource = dataReader;
+
+            //Binding gridview or control datacsource to binding source:
+            dgvStudentList.DataSource = source2;
+
+            //Disconnect
+            con.Close();
+
+
+            //update:
+            //string connetionString = null;
+            //SqlConnection connection;
+            //SqlDataAdapter adapter = new SqlDataAdapter();
+            //string sql = null;
+            //connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+            //connection = new SqlConnection(connetionString);
+            //sql = "update product set product_price = 1001 where Product_name ='Product6'";
+            //try
+            //{
+            //    connection.Open();
+            //    adapter.UpdateCommand = connection.CreateCommand();
+            //    adapter.UpdateCommand.CommandText = sql;
+            //    adapter.UpdateCommand.ExecuteNonQuery();
+            //    MessageBox.Show("Row updated !! ");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}
+
+        }
+
+    }

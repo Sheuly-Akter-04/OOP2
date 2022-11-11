@@ -1,0 +1,33 @@
+SQL Server Update to db:
+
+//Namespace:
+using System.Data.SqlClient;
+
+
+//Initiating SQL Connection:
+SqlConnection con = new SqlConnection();
+
+
+//ConnectionString:
+con.ConnectionString = "data source = localhost;database = HR2;integrated security = SSPI";
+
+//Generating SQL Query
+string sql = "UPDATE Employee SET Name = " + " ' " + textBox2.Text + " '" + "where Id=" + textBox1.Text;
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    //Opening the connection:
+                    con.Open();
+
+                    //cmd.Parameters.Add("@param1", SqlDbType.Int).Value = int.Parse(textBox1.Text);
+                    //cmd.Parameters.Add("@param2", SqlDbType.VarChar, 50).Value = textBox2.Text;
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+
+			//Disconnect
+			con.Close();
+                }
+
+
+
+

@@ -1,0 +1,32 @@
+SQL Server Connection:
+
+//Namespace:
+using System.Data.SqlClient;
+
+//Initialization:
+//Initiating SQL Connection:
+SqlConnection con = new SqlConnection();
+
+//ConnectionString:
+con.ConnectionString = "data source = localhost;" +
+                       "database = HR2;" +
+                       "integrated security = SSPI";
+
+//Generating SQL Query
+SqlCommand command = new SqlCommand("select * from Employee",con);
+
+//Opening the connection:
+con.Open();
+
+//Execute SQL Query:
+SqlDataReader DR = command.ExecuteReader();
+
+//Binding reader to binding source
+BindingSource source = new BindingSource();
+source.DataSource = DR;
+
+//Binding gridview or control datacsource to binding source:
+dataGridView1.DataSource = source;
+            
+//Disconnect
+con.Close();
