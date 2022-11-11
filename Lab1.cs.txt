@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyFirstLab1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Console.WriteLine("Welcome to OOP-2 Lab Class ");
+
+            //Console.Write("Enter your first Name : ");
+            //string myFirstName = Console.ReadLine();
+            
+            //Console.Write("Enter your second Name : ");
+            //string myLastName = Console.ReadLine();
+
+            //string firstName = myFirstName.Trim();
+            //string lastName = myLastName.Trim();
+
+            //Console.WriteLine("My full name is : {0} {1}", myFirstName.Trim(), myLastName.Trim());
+
+            //Sequence statement line execution:
+            //Branching: (if, if-else, switch):
+            //Loop: (for, while, do-while, foreach):
+
+            //int no2 = 20;
+            //    //int.Parse(Console.ReadLine());
+            //int count2 = 10;
+            //while (count2 < no2) //(10 < 20) -> true
+            //{
+            //    Console.Write("Number is {0} \n", no2); 
+            //    count2++;
+            //}
+
+            //Console.WriteLine("Enter 5 Asian country names: ");
+            //string[] countries = new string[5];
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    countries[i] = Console.ReadLine();
+            //}
+
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    // Country 1 : Bangladesh
+            //    // Country 2 : India
+            //    //Console.WriteLine("Country {0} is : {1}",i+1, countries[i]);
+
+            //    //Index out of bound:
+            //}
+
+            //foreach (string country in countries)
+            //{
+            //    //Print country name starting with B or b:
+            //    //if (country.StartsWith("B") || country.StartsWith("b"))
+            //    if(country.ToLower().StartsWith("b"))
+            //    {
+            //        Console.WriteLine(country); //--> Bangladesh
+            //    }
+            //    //if (country.ToUpper().StartsWith("B"))
+            //    //{
+            //    //    Console.WriteLine(country);
+            //    //}
+            //}
+
+            string countryName = "Bangladesh";
+            char[] countryparts = countryName.ToCharArray();
+            foreach (var countrypart in countryparts)
+            {
+                Console.WriteLine(countrypart);
+            }
+            
+            //foreach (string country in countries)
+            //{
+            //    //Print country name ends with SH or sh:
+            //    if (country.EndsWith("SH") || country.EndsWith("sh"))
+            //    {
+            //        Console.WriteLine(country);
+            //    }
+            //}
+
+            //foreach (string country in countries)
+            //{
+            //    //Print country name contains with GLA or gla:
+            //    if (country.Contains("GLA") || country.Contains("gla"))
+            //    {
+            //        Console.WriteLine(country);
+            //    }
+            //}
+
+
+
+            //int myAge = int.Parse(Console.ReadLine());
+            //Console.WriteLine(myAge);
+
+            //string a = myAge.ToString();
+
+
+
+
+
+            Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyFirstLab1
+{
+    internal class paramsClass
+    {
+        private static void Main(string[] args)
+        {
+            ////Ex4:Passing Array:
+            string[] myArray = new string[50];
+            myArray[0] = "David";
+            myArray[1] = "Jane";
+            myArray[2] = "Henry";
+            myArray[3] = "William";
+            myArray[4] = "Kate";
+
+            //ArrayMethod(myArray);
+
+            //Ex5: Passing Array PArameters:
+            //string n1 = "abc", n2 = "xyz", n3 = "pqr";
+            //ArrayMethod(n1, n2, n3);
+            ArrayMethod(myArray[0], myArray[3], myArray[4]);
+            Console.ReadKey();
+        }
+
+        //public static void ArrayMethod(string[] names)
+        //{
+        //    foreach (var name in names)
+        //    {
+        //        Console.WriteLine(name);
+        //    }
+
+        //    Console.WriteLine("Array Size: {0}", names.Length);
+        //}
+
+
+
+        //Ex5:Passing array parameters:
+        public static void ArrayMethod(params string[] names)
+        {
+            foreach (var name in names)
+            {
+                Console.WriteLine(name);
+            }
+            Console.WriteLine("Array Size: {0}", names.Length);
+        }
+    }
+    
+}

@@ -1,0 +1,86 @@
+﻿using System;
+using System.Linq;
+
+namespace MyProject1.Program1
+{
+    internal class Example9_PassByReference
+    {
+        public static void Main()
+        {
+            #region Ex1:
+            //int y = 5;
+            //MyFunc(ref y);
+            //Console.WriteLine(y);
+
+            #endregion
+            #region Ex3: and Ex4:
+            ////Ex3:using out keyword:
+            //int a = 10, b = 20;
+            //int sum, prod = 0;
+
+            //Sum(a,b,out sum, out prod);
+
+            //Console.WriteLine("Sum of {0} and {1} is {2}",a,b,sum);
+            //Console.WriteLine("Product of {0} and {1} is {2}",
+            //    a, b, prod);
+
+            ////Ex4:Passing Array:
+            //string[] myArray = new string[5];
+            //myArray[0] = "David";
+            //myArray[1] = "Jane";
+            ////myArray[2] = "Henry";
+            ////myArray[3] = "William";
+            ////myArray[4] = "Kate";
+
+            //ArrayMethod(myArray);
+            #endregion
+            //Ex5: Passing Array PArameters:
+            string n1 = "abc", n2 = "xyz", n3 = "pqr";
+            ArrayMethod(n1,n2,n3);
+            Console.ReadKey();
+        }
+        #region Ex1 and EX2:
+        ////Ex1:PAss by Value
+        //public static void MyFunc(int x)
+        //{
+        //    x = 10;
+        //}
+        //Ex2:Pass by Reference
+        //public static void MyFunc(ref int x)
+        //{
+        //    x = 10;
+        //}
+        #endregion
+        #region Ex3:
+        ////Ex3: out keyword:
+        //public static void Sum(int x, int y, out int sum, out int prod)
+        //{
+        //    sum = x + y;
+        //    prod = x * y;
+        //}
+        #endregion
+        #region Ex4:
+        ////Ex4:Passing an array:
+        //public static void ArrayMethod(string[] names)
+        //{
+        //    foreach (var name in names)
+        //    {
+        //        Console.WriteLine(name);
+        //    }
+
+        //    Console.WriteLine("Array Size: {0}", names.Length);
+        //}
+
+        #endregion
+
+        //Ex5:Passing array parameters:
+        public static void ArrayMethod(params string[] names)
+        {
+            foreach (var name in names)
+            {
+                Console.WriteLine(name);
+            }
+            Console.WriteLine("Array Size: {0}", names.Length);
+        }
+    }
+}

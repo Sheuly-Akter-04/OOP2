@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyProject1.Program1
+{
+    class Arrray_TwoDimensional
+    {
+        static void Main(string[] args)
+        {
+            // Ex1: Initializing 2-Dimentional Array:
+            //int[,] a = new int[3, 4] {
+            //    {0, 1, 2, 3} ,   /*  initializers for row indexed by 0 */
+            //    {4, 5, 6, 7} ,   /*  initializers for row indexed by 1 */
+            //    {8, 9, 10, 11}   /*  initializers for row indexed by 2 */
+            //    };
+
+            ////Accessing 2-Dimensional Array:
+            //int val = a[2, 3];
+
+            //Ex2:
+
+            /* an array with 3 rows and 2 columns*/
+            int[,] a = new int[3, 2];
+            int i, j;
+
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 2; j++)
+                {
+                    a[i,j] = int.Parse(Console.ReadLine());
+                }
+            }
+            /* output each array element's value */
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 2; j++)
+                {
+                    Console.WriteLine("a[{0},{1}] = {2}", i, j, a[i, j]);
+                }
+            }
+            Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyProject1.Program1
+{
+    class ClassDestructor
+    {
+        private double length;   // Length of a line
+
+        public ClassDestructor()
+        {   // constructor
+            Console.WriteLine("Object is being created");
+        }
+        ~ClassDestructor()
+        {   //destructor
+            Console.WriteLine("Object is being deleted");
+        }
+        public void setLength(double len)
+        {
+            length = len;
+        }
+        public double getLength()
+        {
+            return length;
+        }
+        static void Main(string[] args)
+        {
+            ClassDestructor line = new ClassDestructor();
+
+            // set line length
+            line.setLength(6.0);
+            Console.WriteLine("Length of line : {0}", line.getLength());
+
+            //Try with Ctrl+F5:
+
+            //Console.ReadKey();
+        }
+    }
+}
